@@ -1,8 +1,8 @@
-import fs from 'fs';
-import { resolve as pathResolve } from 'path';
-import { exec, spawn } from 'child_process';
 import cheerio from 'cheerio';
+import { exec, spawn } from 'child_process';
+import fs from 'fs';
 import HTMLtoJSX from 'htmltojsx';
+import { resolve as pathResolve } from 'path';
 import prettier from 'prettier';
 
 const main = async () => {
@@ -151,6 +151,7 @@ const extractImageFiles = (htmlFilePath: string) => {
   const imageVariables = [];
   const memo = [];
   const $ = cheerio.load(fs.readFileSync(htmlFilePath, 'utf-8'));
+
   $('img').each(function() {
     const oldsrc = $(this).attr('src');
     const newsrc = getCorrectedPathName(oldsrc);
